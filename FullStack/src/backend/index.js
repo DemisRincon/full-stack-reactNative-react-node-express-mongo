@@ -19,7 +19,7 @@ nextApp.prepare().then(() => {
   app.use(urlencoded({ extended: false }));
 
   app.use("/api", userRoute);
-  
+
   app.get("/", (req, res) => {
     const { application } = req.params;
     return nextApp.render(req, res, `/`, req.query);
@@ -27,10 +27,9 @@ nextApp.prepare().then(() => {
   app.all("*", (req, res) => {
     return handle(req, res);
   });
-  mongoose.connect(
-    process.env.DB_CONNECTION,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    () => console.log("onnected to db")
-  );
+  mongoose.connect(process.env.DB_CONNECTION, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   app.listen($serverPort());
 });
