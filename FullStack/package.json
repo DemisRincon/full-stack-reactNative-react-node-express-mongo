@@ -1,0 +1,38 @@
+{
+  "name": "databaseclothstore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "next build",
+    "start": "cross-env NODE_ENV=production babel-node src/backend",
+    "dev": "nodemon src/backend --exec babel-node",
+    "clean": "rimraf .next"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.14.1",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "nodemon": "^2.0.7",
+    "terser-webpack-plugin": "^4.2.1"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^9.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7",
+    "next": "^10.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "webpack": "^2.5.1"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}

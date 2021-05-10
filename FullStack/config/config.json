@@ -1,0 +1,28 @@
+{
+    "general": {
+        "serverPort": 3000,
+        "security": {
+            "secretKey": "D3r1NC0n",
+            "expiresIn": "1d"
+          }
+    },
+    "local": {
+        "baseUrl": "http://localhost:3000",
+        "api": {
+            "internal": "http://localhost:3000/api",
+            "external": "http://172.20.20.228/pdv"
+        },
+        "debug": true,
+        "cache": {
+            "enable": false,
+            "whitelist": []
+        },
+        "session": {
+            "cookieDomain": "localhost",
+            "maxAge": 86400,
+            "cookiePrefix": "",
+            "path": "/",
+            "httpOnly": true
+        }
+    }
+}
