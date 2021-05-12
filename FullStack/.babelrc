@@ -10,7 +10,8 @@
           "config":"./config",
           "lib":"./src/library",
           "components":"./src/frontend/components",
-          "reduxConf":"./src/library/redux"
+          "reduxConf":"./src/library/redux",
+          "frontend":"./src/frontend"
         }
       }
     ]

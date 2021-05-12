@@ -1,17 +1,41 @@
-import { Router, response } from "express";
-import {
-  isAGodUserCreation,
-  isAValidUser,
-  userExist,
-} from "../middlewares/user";
+import { isAGodUserCreation, userExist } from "../middlewares/user";
+import { setBase64, setSHA1 } from "lib/methods/security";
 
+import { $security } from "config";
+import { Router } from "express";
 import User from "../model/user";
-import { nextApp } from "../";
+import jwt from "jsonwebtoken";
 
 const router = Router();
-router.post("/auth", isAValidUser(), async (req, res) => {
-  console.log(req.app);
-  return nextApp.render(req, res, `/`, req.query);
+router.post("/auth", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const response = await User.find({ email, password });
+    if (response[0]._id) {
+      const userData = response[0];
+
+      userData.token = setBase64(
+        setSHA1(process.env.SECRET_KEY) + userData._id
+      );
+      jwt.sign(
+        { data: setBase64(userData) },
+        process.env.SECRET_KEY,
+        { expiresIn: $security().expiresIn },
+        (error, accessToken) => {
+          if (error) {
+            res.status(403).send({ isUser: false, message: "Can't Login" });
+          } else {
+            res.cookie("at", accessToken).json({ response: [response] });
+          }
+        }
+      );
+    }
+  } catch (error) {
+    res.status(403).json({
+      response: [{ isUser: false, message: "User or password are incorrect" }],
+    });
+  }
 });
 
 router.post(

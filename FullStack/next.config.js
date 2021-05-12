@@ -1,9 +1,12 @@
 const TerserPlugin = require("terser-webpack-plugin");
-const path = require('path')
+const path = require("path");
 // Webpack configuration
 module.exports = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, "styles")],
+  },
+  env: {
+    URL_LOGIN: "/auth",
   },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {

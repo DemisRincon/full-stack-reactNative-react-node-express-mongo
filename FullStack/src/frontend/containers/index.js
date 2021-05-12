@@ -1,3 +1,3 @@
-import LoginLayou from "./login";
+import LoginLayou from "./login/redux/wrapper";
 
 export { LoginLayou };

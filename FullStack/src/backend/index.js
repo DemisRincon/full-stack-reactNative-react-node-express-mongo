@@ -3,6 +3,7 @@ import "dotenv/config";
 import { $isLocal, $serverPort } from "config";
 import express, { json, urlencoded } from "express";
 
+import cookieParser from "cookie-parser";
 import { isConnected } from "./middlewares/user";
 import { join } from "path";
 import mongoose from "mongoose";
@@ -18,14 +19,15 @@ nextApp.prepare().then(() => {
   app.use(express.static(join(__dirname, "../public")));
   app.use(json());
   app.use(urlencoded({ extended: false }));
-
+  app.use(cookieParser());
   app.use("/api", userRoute);
-  app.get('/login', (req, res) => {
-    return nextApp.render(req, res, '/login', req.query)
-  })
+  app.get("/login", (req, res) => {
+    return nextApp.render(req, res, "/login", req.query);
+  });
 
   app.get("/:application", (req, res) => {
     const { application } = req.params;
+    console.log("    APPLICATION", req.params);
     return nextApp.render(req, res, `/${application}`, req.query);
   });
   app.all("*", (req, res) => {

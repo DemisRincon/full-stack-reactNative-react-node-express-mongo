@@ -5,8 +5,8 @@ import React from "react";
 import styles from "./styles.module.scss";
 import { useLogin } from "lib/customHooks";
 
-const LoginLayou = () => {
-  const [propsEmail, propsPassword, errors, submit] = useLogin();
+const LoginLayou = ({doLogin}) => {
+  const [propsEmail, propsPassword, errors, submit] = useLogin(doLogin);
   return (
     <div className={styles.LayoutLogin}>
       <div className={styles.formContainer}>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { useInput } from "./useInput";
 
-export const useLogin = () => {
+export const useLogin = (doLogin) => {
   const [propsEmail] = useInput("");
   const [propsPassword] = useInput("");
   const [errors, setErrors] = useState({
@@ -13,13 +13,11 @@ export const useLogin = () => {
 
   useEffect(() => {
     if (propsEmail.value && !isValidEmail(propsEmail.value)) {
-      console.log("has entered  email errors");
       return setErrors({
         ...errors,
         email: "An valid email should be like example@exa.com",
       });
     } else {
-      console.log("has entered no email errors");
       return setErrors({
         ...errors,
         email: "",
@@ -29,7 +27,6 @@ export const useLogin = () => {
 
   useEffect(() => {
     if (propsPassword.value && !isValidPassword(propsPassword.value)) {
-      console.log("has entered");
       return setErrors({
         ...errors,
         password:
@@ -56,8 +53,10 @@ export const useLogin = () => {
           : errors.password,
       });
     }
-
-    console.log("Doing login");
+    doLogin({
+      email: propsEmail.value,
+      password: propsPassword.value,
+    });
   };
   return [propsEmail, propsPassword, errors, submit];
 };
