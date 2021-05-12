@@ -1,11 +1,8 @@
-import React from 'react'
+import { LoginLayou } from "../frontend/containers";
+import React from "react";
 
 const Login = () => {
-    return (
-        <div>
-            login
-        </div>
-    )
-}
+  return <LoginLayou />;
+};
 
-export default Login
+export default Login;

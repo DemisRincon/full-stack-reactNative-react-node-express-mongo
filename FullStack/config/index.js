@@ -20,3 +20,4 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== "development") {
 export const $config = () => (!config ? configurations[env] : config);
 export const $isLocal = () => env === "local";
 export const $serverPort = () => $config().serverPort;
+export const $security = () => $config().security

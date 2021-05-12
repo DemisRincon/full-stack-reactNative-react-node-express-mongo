@@ -1,4 +1,9 @@
+import { setBase64, setSHA1 } from "lib/methods/security";
+
+import { $security } from "config";
 import User from "../model/user";
+import jwt from "jsonwebtoken";
+import { nextApp } from "../index";
 
 export const userExist = () => async (req, res, next) => {
   const { email, password } = req.body;
@@ -46,8 +51,23 @@ export const isAValidUser = () => async (req, res, next) => {
   try {
     const response = await User.find({ email, password });
     if (response[0]._id) {
-        const userData = response[0]
-       
+      const userData = response[0];
+      userData.token = setBase64(
+        `${setSHA1(process.env.SECRET_KEY)}${userData._id}`
+      );
+      jwt.sign(
+        { data: setBase64(userData) },
+        process.env.SECRET_KEY,
+        { expiresIn: $security().expiresIn },
+        (error, accessToken) => {
+          if (error) {
+            res.status(403).send({ isUser: false, message: "Can't Login" });
+          } else {
+            res.session("at", accessToken);
+            return next();
+          }
+        }
+      );
       return next();
     }
   } catch (error) {
@@ -56,3 +76,15 @@ export const isAValidUser = () => async (req, res, next) => {
     });
   }
 };
+export const isConnected =
+  ({ isLogged = true, redirectTo = false, at = false }) =>
+  async (req, res, next) => {
+    try {
+      const accessToken = req.cookies.at || at;
+      console.log("ACCES TOKEN", accessToken);
+    } catch (error) {
+      console.log("catiching", redirectTo);
+    }
+    return nextApp.render(req, res, `${redirectTo || "/"}`, req.query);
+    return next();
+  };

@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
+import { withRedux } from "reduxConf";
 
 const Home = () => {
-    return (
-        <div>
-            hello from home
-        </div>
-    )
-}
+  return <div>hello from home</div>;
+};
 
-export default Home
+export default withRedux(Home);

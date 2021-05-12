@@ -16,7 +16,6 @@ const SalesSlider = () => {
       <Carousel
         autoplay
         autoplayTimeout={5000}
-      
         loop
         index={0}
         pageSize={BannerWidth}>

@@ -1,21 +1,17 @@
 import { Router, response } from "express";
-import { isAGodUserCreation, userExist } from "../middlewares/user";
+import {
+  isAGodUserCreation,
+  isAValidUser,
+  userExist,
+} from "../middlewares/user";
 
 import User from "../model/user";
+import { nextApp } from "../";
 
 const router = Router();
-router.post("/auth", async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const response = await User.find({ email, password });
-    res
-      .status(200)
-      .json({ response: [{ isUser: true, userId: response[0]._id }] });
-  } catch (error) {
-    res.status(404).json({
-      response: [{ isUser: false, message: "User or password are incorrect" }],
-    });
-  }
+router.post("/auth", isAValidUser(), async (req, res) => {
+  console.log(req.app);
+  return nextApp.render(req, res, `/`, req.query);
 });
 
 router.post(
