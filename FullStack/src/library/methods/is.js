@@ -1,48 +1,60 @@
-export const isValidEmail = email => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
-  
+export const isValidEmail = (email) => {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
 
-  export const isValidPassword = password => {
-    const re = /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$/;
-    return re.test(password);
-  };
+export const isValidPassword = (password) => {
+  const re = /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$/;
+  return re.test(password);
+};
 
+export const isArray = (variable) => Array.isArray(variable);
 
-export const isArray = variable => Array.isArray(variable)
+export const isDefined = (variable) =>
+  typeof variable !== "undefined" && variable !== null;
 
-export const isDefined = variable => typeof variable !== 'undefined' && variable !== null
+export const isFalse = (variable) => isDefined(variable) && variable === false;
 
-export const isFalse = variable => isDefined(variable) && variable === false
+export const isNumber = (variable) => typeof variable === "number";
 
-export const isNumber = variable => typeof variable === 'number'
+export const isFunction = (variable) => typeof variable === "function";
 
-
-export const isFunction = variable => typeof variable === 'function'
-
-export const isJson = str => {
+export const isJson = (str) => {
   if (!str || str === null) {
-    return false
+    return false;
   }
 
   try {
-    JSON.parse(str)
+    JSON.parse(str);
   } catch (e) {
-    return false
+    return false;
   }
 
-  return true
+  return true;
+};
+
+export const isObject = (variable) =>
+  isDefined(variable) &&
+  typeof variable === "object" &&
+  !Array.isArray(variable);
+
+export const isPassword = (password, min = 8) =>
+  password && password.length >= min;
+
+export const isPasswordMatch = (p1, p2) =>
+  isPassword(p1) && isPassword(p2) && p1 === p2;
+
+export const isString = (variable) =>
+  isDefined(variable) && typeof variable === "string";
+
+export const isUndefined = (variable) =>
+  typeof variable === "undefined" || variable === null;
+
+export const isBrowser = () => typeof window !== "undefined";
+
+export function isFirstRender(items) {
+  return (
+    !isDefined(items) || items.length === 0 || Object.keys(items).length === 0
+  );
 }
-
-export const isObject = variable => isDefined(variable) && typeof variable === 'object' && !Array.isArray(variable)
-
-export const isPassword = (password, min = 8) => password && password.length >= min
-
-export const isPasswordMatch = (p1, p2) => (isPassword(p1) && isPassword(p2)) && p1 === p2
-
-export const isString = variable => isDefined(variable) && typeof variable === 'string'
-
-export const isUndefined = variable => typeof variable === 'undefined' || variable === null
-
-export const isBrowser = () => typeof window !== 'undefined'

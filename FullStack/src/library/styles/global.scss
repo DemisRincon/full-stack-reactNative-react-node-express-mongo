@@ -3,7 +3,10 @@ h1,
 h2,
 h3,
 h4,
-h5,p {
+h5,
+p,
+span,
+label {
   font-family: $SeriousFont;
 }
 
@@ -19,7 +22,7 @@ body {
 }
 body > div:first-child {
   width: 100%;
-  min-height: 100% !important;
+  min-height: 100vh !important;
   display: flex;
   justify-content: center;
   align-items: flex-start;

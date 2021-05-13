@@ -21,15 +21,11 @@ nextApp.prepare().then(() => {
   app.use(urlencoded({ extended: false }));
   app.use(cookieParser());
   app.use("/api", userRoute);
-  app.get("/login", (req, res) => {
-    return nextApp.render(req, res, "/login", req.query);
-  });
+  app.get("/", isConnected("","/login"));
+  app.get("/login", isConnected("/"));
 
-  app.get("/:application", (req, res) => {
-    const { application } = req.params;
-    console.log("    APPLICATION", req.params);
-    return nextApp.render(req, res, `/${application}`, req.query);
-  });
+
+ 
   app.all("*", (req, res) => {
     return handle(req, res);
   });

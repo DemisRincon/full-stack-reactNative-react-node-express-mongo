@@ -1,0 +1,36 @@
+{
+    "superAdmin": [
+        {
+            "icon": [
+                "fas",
+                "home"
+            ],
+            "name": "Home",
+            "url": "/"
+        },
+        {
+            "icon": [
+                "fas",
+                "spray-can"
+            ],
+            "name": "Products",
+            "url": "/products"
+        },
+        {
+            "icon": [
+                "fas",
+                "tags"
+            ],
+            "name": "Sales",
+            "url": "/sales"
+        },
+        {
+            "icon": [
+                "fas",
+                "users-cog"
+            ],
+            "name": "Users",
+            "url": "/users"
+        }
+    ]
+}

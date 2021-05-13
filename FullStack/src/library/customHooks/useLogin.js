@@ -40,11 +40,8 @@ export const useLogin = (doLogin) => {
     }
   }, [propsPassword.value]);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    if (errors.email || errors.password) {
-      return;
-    }
     if (!propsEmail.value || !propsPassword.value) {
       return setErrors({
         email: !propsEmail.value ? "You should provide an email" : errors.email,
@@ -53,10 +50,20 @@ export const useLogin = (doLogin) => {
           : errors.password,
       });
     }
-    doLogin({
+    if (errors.email || errors.password) {
+      return;
+    }
+    const response = await doLogin({
       email: propsEmail.value,
       password: propsPassword.value,
     });
+    if (response.status !== 200) {
+      return setErrors({
+        email: "This may be incorrect",
+        password: "This may be incorrect",
+      });
+    }
+    console.log("RESPONSE", response);
   };
   return [propsEmail, propsPassword, errors, submit];
 };

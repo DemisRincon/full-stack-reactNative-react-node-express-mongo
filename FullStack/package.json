@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production babel-node src/backend",
     "dev": "nodemon src/backend --exec babel-node",
+    "nextdev": "next dev",
     "clean": "rimraf .next"
   },
   "keywords": [],
@@ -22,6 +23,9 @@
     "terser-webpack-plugin": "^4.2.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
     "cross-env": "^7.0.3",

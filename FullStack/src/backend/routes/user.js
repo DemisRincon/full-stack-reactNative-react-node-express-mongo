@@ -1,4 +1,4 @@
-import { isAGodUserCreation, userExist } from "../middlewares/user";
+import { isSuperAdminCreation, userExist } from "../middlewares/user";
 import { setBase64, setSHA1 } from "lib/methods/security";
 
 import { $security } from "config";
@@ -26,7 +26,7 @@ router.post("/auth", async (req, res) => {
           if (error) {
             res.status(403).send({ isUser: false, message: "Can't Login" });
           } else {
-            res.cookie("at", accessToken).json({ response: [response] });
+            res.cookie("at", accessToken,{expire : $security().expiresIn }).json({ response: [response] });
           }
         }
       );
@@ -40,7 +40,7 @@ router.post("/auth", async (req, res) => {
 
 router.post(
   "/userCreation",
-  isAGodUserCreation(),
+  isSuperAdminCreation(),
   userExist(),
   async (req, res) => {
     const { name, email, password, permissions, userCreator } = req.body;

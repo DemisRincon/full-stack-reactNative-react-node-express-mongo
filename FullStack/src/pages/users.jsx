@@ -3,16 +3,17 @@ import { Home } from "../frontend/containers";
 import React from "react";
 import { withRedux } from "reduxConf";
 
-const HomePage = () => {
+const UsersPage = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
-        <meta name="title" content="Home" />
+        <title>Users</title>
+        <meta name="title" content="Users" />
       </Head>
+
       <Home />
     </>
   );
 };
 
-export default withRedux(HomePage);
+export default withRedux(UsersPage);

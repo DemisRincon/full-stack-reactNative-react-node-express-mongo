@@ -1,12 +1,13 @@
 import { Button, Input } from "components";
-import { FaLock, FaUserAlt } from "react-icons/fa";
+import React, { useState } from "react";
 
-import React from "react";
 import styles from "./styles.module.scss";
 import { useLogin } from "lib/customHooks";
 
-const LoginLayou = ({doLogin}) => {
+const LoginLayou = ({ doLogin }) => {
   const [propsEmail, propsPassword, errors, submit] = useLogin(doLogin);
+  const [isPassVisible, setIsPassVisible] = useState(false);
+
   return (
     <div className={styles.LayoutLogin}>
       <div className={styles.formContainer}>
@@ -22,18 +23,19 @@ const LoginLayou = ({doLogin}) => {
                 id="email"
                 type="text"
                 placeholder="Email"
-              >
-                <FaUserAlt style={{ color: "#ccc" }} />
-              </Input>
+                icon={["fas", "user"]}
+              />
+
               <Input
                 {...propsPassword}
                 errorLabel={errors.password}
                 id="password"
-                type="password"
+                type={isPassVisible ? "text" : "password"}
                 placeholder="Password"
-              >
-                <FaLock style={{ color: "#ccc" }} />
-              </Input>
+                icon={isPassVisible ? ["fas", "eye-slash"] : ["fas", "eye"]}
+                onClick={() => setIsPassVisible(!isPassVisible)}
+              />
+
               <Button type="submit" text="Login" />
             </div>
           </div>

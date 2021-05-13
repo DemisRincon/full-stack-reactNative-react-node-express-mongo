@@ -1,15 +1,13 @@
 @import "../../../library/styles/vars";
 
 .MainInputContainer {
-
   width: 100%;
   min-height: 75px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: fle;
-  
-  
+
   .Input {
     display: flex;
     background-color: white;
@@ -27,7 +25,6 @@
       background-color: white !important;
     }
     .IconContainer {
-     
       height: 100%;
       width: 35px;
       display: flex;
@@ -35,13 +32,13 @@
       align-items: center;
     }
   }
-  label{
+  label {
     max-height: 30;
-      color: white;
-        font-weight: bold;
-        font-size: 12px;
-        text-align: center;
-padding: 0;
-overflow-y: visible;
-      }
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    padding: 0;
+    overflow-y: visible;
+  }
 }

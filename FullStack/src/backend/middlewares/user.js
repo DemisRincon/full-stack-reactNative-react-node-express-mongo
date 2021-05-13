@@ -1,5 +1,6 @@
 import User from "../model/user";
 import { nextApp } from "../index";
+import { verifySeverCookie } from "lib/methods";
 
 export const userExist = () => async (req, res, next) => {
   const { email, password } = req.body;
@@ -18,13 +19,13 @@ export const userExist = () => async (req, res, next) => {
   }
 };
 
-export const isAGodUserCreation = () => async (req, res, next) => {
+export const isSuperAdminCreation = () => async (req, res, next) => {
   const { permissions, userCreator } = req.body;
 
   try {
     const userCreatorPermision = await User.find({ _id: userCreator });
-    if (permissions === "god") {
-      if (userCreatorPermision[0].permissions !== "god") {
+    if (permissions === "superAdmin") {
+      if (userCreatorPermision[0].permissions !== "superAdmin") {
         res.status(403).json({
           response: {
             message:
@@ -43,15 +44,21 @@ export const isAGodUserCreation = () => async (req, res, next) => {
   }
 };
 
-export const isConnected =
-  ({ isLogged = true, redirectTo = false, at = false }) =>
-  async (req, res, next) => {
-    try {
-      const accessToken = req.cookies.at || at;
-      console.log("ACCES TOKEN", accessToken);
-    } catch (error) {
-      console.log("catiching", redirectTo);
+export const isConnected = (redirectTo,redirectNoConnected) => async (req, res, next) => {
+  try {
+    const userConnected = await User.find(verifySeverCookie("at", req));
+
+    if (userConnected[0]._id) {
+      if (redirectTo) {
+        
+        return res.redirect(redirectTo);
+      }
+      return next()
     }
-    return nextApp.render(req, res, `${redirectTo || "/"}`, req.query);
+  } catch (error) {
+    if (redirectNoConnected) {
+      return res.redirect(redirectNoConnected);
+    }
     return next();
-  };
+  }
+};
