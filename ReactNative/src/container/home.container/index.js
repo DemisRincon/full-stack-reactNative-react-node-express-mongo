@@ -10,8 +10,8 @@ const Home = () => {
     <ScrollView style={styles.container}>
       <SafeAreaView />
       <SalesSlider />
-      <VerticalContainer text="Lo más vendido" articles={mostsellarticles} />
-      <VerticalContainer text="Basado en lo que viste" articles={mostsellarticles} />
+      <VerticalContainer text="Most sell" articles={mostsellarticles} />
+      <VerticalContainer text="What you saw" articles={mostsellarticles} />
     </ScrollView>
   );
 };

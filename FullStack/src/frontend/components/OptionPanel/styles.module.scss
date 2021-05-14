@@ -1,0 +1,14 @@
+.MenuOption {
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .OptionContainer {
+    background-color: white;
+    z-index: 1;
+    box-shadow: 0px 0px 5px 5px #aaa;
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
+  }
+}

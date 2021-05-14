@@ -18,5 +18,9 @@ const UserSchema = Schema({
     type: String,
     required: false,
   },
+  photo: {
+    data: Buffer,
+    contentType: String
+  },
 });
 export default model('Users',UserSchema)

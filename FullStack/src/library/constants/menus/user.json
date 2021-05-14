@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Add user",
+        "url": "users/adduser",
+        "description": "Add user if you have necesary permisions",
+        "usersAllowed": [
+            "superAdmin",
+            "admin"
+        ]
+    },
+    {
+        "name": "Edit user",
+        "url": "users/edituser",
+        "description": "Add user if you have necesary permisions",
+        "usersAllowed": [
+            "superAdmin",
+            "admin"
+        ]
+    },
+    {
+        "name": "Delete user",
+        "url": "users/deleteuser",
+        "description": "Add user if you have necesary permisions",
+        "usersAllowed": [
+            "superAdmin",
+            "admin"
+        ]
+    }
+]

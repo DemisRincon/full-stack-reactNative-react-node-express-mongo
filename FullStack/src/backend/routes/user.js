@@ -18,6 +18,7 @@ router.post("/auth", async (req, res) => {
       userData.token = setBase64(
         setSHA1(process.env.SECRET_KEY) + userData._id
       );
+      delete userData.password
       jwt.sign(
         { data: setBase64(userData) },
         process.env.SECRET_KEY,
@@ -40,10 +41,10 @@ router.post("/auth", async (req, res) => {
 
 router.post(
   "/userCreation",
-  isSuperAdminCreation(),
-  userExist(),
+ /* isSuperAdminCreation(),
+  userExist(),*/
   async (req, res) => {
-    const { name, email, password, permissions, userCreator } = req.body;
+    const { name, email, password, permissions, userCreator,photo } = req.body;
     try {
       const user = new User({
         name,
@@ -51,8 +52,12 @@ router.post(
         password,
         permissions,
         userCreator,
+        photo
       });
+
+      console.log("user",user);
       const response = await user.save();
+      console.log("user",response);
       res.status(200).json({ response });
     } catch (error) {
       res

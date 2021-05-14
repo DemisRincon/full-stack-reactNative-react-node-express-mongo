@@ -31,7 +31,7 @@ const Header = ({navigate, menu}) => {
         <FontAwesomeIcon size={24} icon={faBars} color="#fff" />
       </View>
       <View style={styles.searchBarContainer}>
-        <SearchBar placeholder="Buscar artículo..." />
+        <SearchBar placeholder="Search..." />
       </View>
       <TouchableOpacity
         style={styles.iconContainer}

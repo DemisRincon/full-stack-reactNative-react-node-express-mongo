@@ -1,6 +1,8 @@
 import Head from "next/head";
-import { Home } from "../frontend/containers";
+import InsideMenu from "../frontend/components/InsideMenu";
 import React from "react";
+import { Users } from "../frontend/containers";
+import menu from 'lib/constants/menus/user.json'
 import { withRedux } from "reduxConf";
 
 const UsersPage = () => {
@@ -11,7 +13,7 @@ const UsersPage = () => {
         <meta name="title" content="Users" />
       </Head>
 
-      <Home />
+    <InsideMenu menu={menu}/>
     </>
   );
 };

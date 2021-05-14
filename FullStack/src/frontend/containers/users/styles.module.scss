@@ -1,0 +1,15 @@
+@import "../../../library/styles/vars";
+.UsersMenu{
+    background-color: red;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    .MenuOption{
+        background-color: blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

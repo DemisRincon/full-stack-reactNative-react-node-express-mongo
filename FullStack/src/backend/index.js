@@ -21,11 +21,9 @@ nextApp.prepare().then(() => {
   app.use(urlencoded({ extended: false }));
   app.use(cookieParser());
   app.use("/api", userRoute);
-  app.get("/", isConnected("","/login"));
+  app.get("/", isConnected("", "/login"));
   app.get("/login", isConnected("/"));
 
-
- 
   app.all("*", (req, res) => {
     return handle(req, res);
   });
@@ -33,5 +31,5 @@ nextApp.prepare().then(() => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  app.listen($serverPort());
+  app.listen(process.env.PORT || $serverPort());
 });
